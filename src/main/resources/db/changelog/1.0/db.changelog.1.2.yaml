@@ -17,4 +17,4 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     foreignKeyName: authors
-                    references: authors(id)
+                    references: authors(id) 

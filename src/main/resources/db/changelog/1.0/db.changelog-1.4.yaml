@@ -14,4 +14,4 @@ databaseChangeLog:
                     primaryKey: true
               - column:
                   name: authority
-                  type: VARCHAR(64)
+                  type: VARCHAR(64) 

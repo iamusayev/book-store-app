@@ -32,7 +32,7 @@ databaseChangeLog:
                   name: email
                   type: VARCHAR(128)
                   constraints:
-                    nullable: false
+                    nullable: false 
                     unique: true
               - column:
                   name: password
