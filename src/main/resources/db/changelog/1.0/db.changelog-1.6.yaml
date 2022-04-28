@@ -17,4 +17,4 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     foreignKeyName: authorities
-                    references: authorities(id)
+                    references: authorities(id) 
