@@ -32,7 +32,7 @@ databaseChangeLog:
                   name: publishing_year
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: false 
               - column:
                   name: publisher_id
                   type: BIGINT
