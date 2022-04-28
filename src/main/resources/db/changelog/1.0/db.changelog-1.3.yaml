@@ -32,6 +32,6 @@ databaseChangeLog:
                   type: TIMESTAMP
                   defaultValueComputed:  now()
               - column:
-                  name: updated_at
+                  name: updated_at 
                   type: TIMESTAMP
                   defaultValueComputed: now()
