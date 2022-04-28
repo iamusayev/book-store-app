@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    //TODO I wasn't able to write security handler in time but I do understand that success and refresh tokens
+    //TODO I wasn't able to write security handler in time and I do understand that success and refresh tokens
     //and srp are the best choice for that situation
 
     public static final String REGISTER_END_POINT = "/v1/users/**";
