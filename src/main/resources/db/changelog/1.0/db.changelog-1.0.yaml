@@ -22,4 +22,4 @@ databaseChangeLog:
                   name: created_year
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: false 
