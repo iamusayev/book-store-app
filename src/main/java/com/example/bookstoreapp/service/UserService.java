@@ -24,13 +24,20 @@ public class UserService {
     public void registerUser(UserRegisterDto registerDto) {
         log.info("ActionLog.registerUser.start");
 
-        var authority = authorityRepository.findByAuthority("USER");
-        var entity = UserMapper.mapRegisterDtoToEntity(registerDto);
-        entity.setPassword(encoder.encode(entity.getPassword()));
-        entity.setAuthorities(Set.of(authority));
+        Optional<UserEntity> checkEmailAndUsername = userRepository.findByEmailOrUsername(registerDto.getEmail(), registerDto.getUsername());
+        if (checkEmailAndUsername.isEmpty()) {
+            AuthorityEntity authority = authorityRepository.findByAuthority("USER");
+            UserEntity entity = UserMapper.mapRegisterDtoToEntity(registerDto);
 
-        userRepository.save(entity);
-        log.info("ActionLog.registerUser.success");
+            entity.setPassword(encoder.encode(entity.getPassword()));
+            entity.setAuthorities(Set.of(authority));
+
+            userRepository.save(entity);
+            log.info("ActionLog.registerUser.success");
+        } else {
+            log.error("ActionLog.registerUser.error");
+            throw new UniquenessViolationException(String.format(VALIDATION_MESSAGE, "email", "or", "username"), VALIDATION_EXCEPTION_CODE);
+        }
     }
 
 

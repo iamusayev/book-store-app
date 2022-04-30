@@ -31,26 +31,36 @@ public class BookService {
 
         var bookEntity = bookRepository.findByBookIdAndPublisherId(bookId, publisherId)
                 .orElseThrow(() -> new UpdateBookException(BOOK_UPDATE_MESSAGE, BOOK_UPDATE_CODE));
-        bookEntity.setName(bookDto.getName());
-        bookEntity.setPublishingYear(bookDto.getPublishingYear());
-        bookEntity.setPageCount(bookDto.getPageCount());
 
-        log.info("ActionLog.updateBook.success publisherId: {}, bookId: {}", publisherId, bookId);
-        bookRepository.save(bookEntity);
+        Optional<BookEntity> checkUnique = bookRepository.findByName(bookDto.getName());
+
+        if (checkUnique.isEmpty()) {
+
+            bookEntity.setName(bookDto.getName());
+            bookEntity.setPublishingYear(bookDto.getPublishingYear());
+            bookEntity.setPageCount(bookDto.getPageCount());
+
+            bookRepository.save(bookEntity);
+
+            log.info("ActionLog.updateBook.success publisherId: {}, bookId: {}", publisherId, bookId);
+        } else {
+            log.error("ActionLog.updateBook.error");
+            throw new UniquenessViolationException(String.format(VALIDATION_MESSAGE, " book", "", ""), VALIDATION_EXCEPTION_CODE);
+        }
     }
 
     public PageableBookDto getBooksWhereNameLike(BookCriteria bookCriteria, PageCriteria pageCriteria) {
         log.info("ActionLog.getAllBooksPagination.start");
 
-        var pageNumber = pageCriteria.getPage();
-        var count = pageCriteria.getCount();
+        int pageNumber = pageCriteria.getPage();
+        int count = pageCriteria.getCount();
 
         Pageable pageRequest = PageRequest.of(pageNumber, count);
         var specification = new BookSpecification(bookCriteria);
 
-        var bookPage = bookRepository.findAll(specification, pageRequest);
-        var books = bookPage.getContent();
-        var bookPageCounts = bookPage.getTotalPages();
+        Page<BookEntity> bookPage = bookRepository.findAll(specification, pageRequest);
+        List <BookEntity> books = bookPage.getContent();
+        int bookPageCounts = bookPage.getTotalPages();
 
         if (bookPageCounts != 0) {
             bookPageCounts -= 1;
