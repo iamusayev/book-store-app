@@ -22,6 +22,4 @@ Request Body (UserRegisterDto) { "firstName" :"firstName", "lastName": "lastname
 "username" : "username",
 "password" : "password", "email": "email@gmail.com"
 }
-'''python
-hey how are you
-'''
+![logo] (https://avatars.mds.yandex.net/i?id=1bb27628a9ff334e7125c3b2147ea37b-4598658-images-thumbs&n=13)
