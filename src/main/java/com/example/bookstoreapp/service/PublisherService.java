@@ -19,21 +19,27 @@ import static com.example.bookstoreapp.model.constants.ExceptionConstants.*;
 @Slf4j
 public class PublisherService {
 
-
+    
     private final PublisherRepository publisherRepository;
     private final BookRepository bookRepository;
 
     public void addBook(Long id, BookDto bookDto) {
         log.info("ActionLog.addBook.start id: {}", id);
 
+        var checkBookName = bookRepository.findByName(bookDto.getName());
+        if (checkBookName.isEmpty()) {
 
-        var bookEntity = BookMapper.mapDtoToEntity(bookDto);
-        bookEntity.setPublisher(fetchPublisherIfExist(id));
-        bookRepository.save(bookEntity);
+            var bookEntity = BookMapper.mapDtoToEntity(bookDto);
+            bookEntity.setPublisher(fetchPublisherIfExist(id));
 
-        log.info("ActionLog.addBook.success id: {}", id);
+            bookRepository.save(bookEntity);
+
+            log.info("ActionLog.addBook.success id: {}", id);
+        } else {
+            log.error("ActionLog.addBook.error");
+            throw new UniquenessViolationException(String.format(VALIDATION_MESSAGE, " book", "", ""), VALIDATION_EXCEPTION_CODE);
+        }
     }
-
 
     public PublisherAndBooksListDto getAllBooksByPublisher(Long id) {
         log.info("ActionLog.getAllBooksBySpecificPublisher.start id: {}", id);
