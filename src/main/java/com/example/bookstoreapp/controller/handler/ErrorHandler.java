@@ -18,17 +18,11 @@ import static org.springframework.http.HttpStatus.*;
 @Slf4j
 public class ErrorHandler {
 
-    @ExceptionHandler(Exception.class)
+   @ExceptionHandler(Exception.class)
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     public ExceptionDto handle(Exception ex) {
         log.error("Exception", ex);
         return new ExceptionDto(UNEXPECTED_EXCEPTION_CODE, UNEXPECTED_EXCEPTION_MESSAGE);
-    }
-
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ExceptionDto handle(DataIntegrityViolationException ex) {
-        log.error("Exception", ex);
-        return new ExceptionDto(SQL_VALIDATION_CODE, SQL_VALIDATION_MESSAGE);
     }
 
     @ExceptionHandler(NotFoundException.class)
@@ -47,8 +41,17 @@ public class ErrorHandler {
 
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(UNPROCESSABLE_ENTITY)
     public ExceptionDto handle(MethodArgumentNotValidException ex) {
         log.error("Exception ", ex);
         return new ExceptionDto(VALIDATION_EXCEPTION_CODE, VALIDATION_EXCEPTION_MESSAGE);
+    }
+
+
+    @ExceptionHandler(UniquenessViolationException.class)
+    @ResponseStatus(UNPROCESSABLE_ENTITY)
+    public ExceptionDto handle(UniquenessViolationException ex) {
+        log.error("Exception", ex);
+        return new ExceptionDto(ex.getCode(), ex.getMessage());
     }
 }
