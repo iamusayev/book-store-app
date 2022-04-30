@@ -15,5 +15,5 @@ public class ExceptionConstants {
 
 
     public static final String BOOK_UPDATE_CODE = "UPDATE_BOOK_EXCEPTION";
-    public static final String BOOK_UPDATE_MESSAGE = "You can't update this because you are not the publisher of this book";
+    public static final String BOOK_UPDATE_MESSAGE = "You can't update this because you are not the publisher of this book"; 
 }
