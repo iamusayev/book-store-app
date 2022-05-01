@@ -81,11 +81,7 @@
 
 - *Authorization*
 
-
-    username           password           ROLE
-    
-    user               user1234           USER 
-    publisher          publihser1234      PUBLIHSER
+![link](https://i.postimg.cc/4d9BDrtx/Screenshot-2.png)
 
 AS **PUBLISHER**
 
