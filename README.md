@@ -1,10 +1,9 @@
                                                   BOOKS STORE APPLICATION
-
-
 **Requirements**
 
+
 - As a user, I should be able to login to the system when a valid username and password supplied
-- As a user, I should get an error message if the username and password are wrong   
+- As a user, I should get an error message if the username and password are wrong
 - As a user, I should be able to list books
 - As a user, I should be able to search specific book (pagination support)
 - As a user, I should be able to see the details of book and author (GET)
@@ -18,8 +17,7 @@
 - As a publisher, I should be able to see the details of book and author (GET)
 - As a publisher, I should be able to add new book to the book list
 - As a publisher, I should be able update a specific book details that has been published by me
-
-
+---
 
 
 - **Database Diagram**
