@@ -81,10 +81,11 @@
 
 - *Authorization*
 
-  **username**| **password**| **role**
-      --- | --- | --- |
-  publisher| publisher1234| PUBLISHER
-  user| user1234|      USER
+
+    username           password           ROLE
+    
+    user               user1234           USER 
+    publisher          publihser1234      PUBLIHSER
 
 AS **PUBLISHER**
 
